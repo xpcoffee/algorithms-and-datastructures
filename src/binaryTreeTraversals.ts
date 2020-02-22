@@ -36,11 +36,8 @@ export function breadthFirstTraversal<T>({ root, onNode, searchPredicate }: Brea
     return;
 }
 
-interface RowTraversalArgs<T> {
-    root: BinaryTreeNode<T> | undefined;
-    onNode?: (value: T) => void;
+interface RowTraversalArgs<T> extends BreadthFirstTraversalArgs<T> {
     onEndRow?: () => void;
-    searchPredicate?: (value: T) => boolean;
 }
 
 /* 
@@ -53,8 +50,8 @@ export function rowTraversal<T>({ root, onNode, onEndRow, searchPredicate }: Row
         return;
     }
 
-    let currentRow = [root];
-    let nextRow: BinaryTreeNode<T>[] = [];
+    let currentRow = [root]; // we're currently traversing through this
+    let nextRow: BinaryTreeNode<T>[] = []; // we're building this up; we'll traverse through it next
 
     while (currentRow.length !== 0) {
         currentRow.forEach(node => {
@@ -71,6 +68,53 @@ export function rowTraversal<T>({ root, onNode, onEndRow, searchPredicate }: Row
         currentRow = nextRow.slice();
         nextRow = [];
         onEndRow && onEndRow();
+    }
+
+    return;
+}
+
+/* 
+ Special case of breadth-first-traversal where order of traversal reverses after every row.
+ Returns a node for which the searchPredicate evalutates to true
+ Returns undefined if no node was found or if no searchPredicate was given
+*/
+export function zigzagTraversal<T>({ root, onNode, searchPredicate }: BreadthFirstTraversalArgs<T>): BinaryTreeNode<T> | undefined {
+    if (root === undefined) {
+        return;
+    }
+
+    let reverseOrder = false; // flag that tracks traversal order
+    let currentRow = [root]; // we're currently traversing through this
+    let nextRow: BinaryTreeNode<T>[] = []; // we're building this up; we'll traverse through it next
+
+    while (currentRow.length !== 0) {
+        /*
+         There's a central thought here: 
+         nodes added to nextRow are always added in the direction that currentRow is being traversed
+         i.e. if we're traversing left to right, items are being added to the nextRow left to right; 
+         if we're traversing right to left, items are being added to the nextRow right to left.
+         To zigzag, we need to take the nextRow and iterate through it in reverse.
+         */
+        for (let i = currentRow.length - 1; i >= 0; i--) {
+            const node = currentRow[i];
+            onNode && onNode(node.value);
+
+            if (searchPredicate && searchPredicate(node.value)) {
+                return node;
+            }
+
+            if (reverseOrder) {
+                node.right && nextRow.push(node.right);
+                node.left && nextRow.push(node.left);
+            } else {
+                node.left && nextRow.push(node.left);
+                node.right && nextRow.push(node.right);
+            }
+        }
+
+        currentRow = nextRow.slice();
+        reverseOrder = !reverseOrder;
+        nextRow = [];
     }
 
     return;
