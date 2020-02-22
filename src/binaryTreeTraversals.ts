@@ -3,7 +3,7 @@ import { Queue } from "./queue";
 
 interface BreadthFirstTraversalArgs<T> {
     root: BinaryTreeNode<T> | undefined;
-    onNode: (value: T) => void,
+    onNode?: (value: T) => void,
     searchPredicate?: (value: T) => boolean;
 }
 
@@ -119,26 +119,3 @@ export function zigzagTraversal<T>({ root, onNode, searchPredicate }: BreadthFir
 
     return;
 }
-
-export function treeRows<T>(root: BinaryTreeNode<T> | undefined): T[][] | undefined {
-    if (root === undefined) {
-        return;
-    }
-
-    const rows: T[][] = [];
-    let rowAccumulator: T[] = [];
-
-    rowTraversal({
-        root,
-        onNode: value => {
-            rowAccumulator.push(value)
-        },
-        onEndRow: () => {
-            rows.push(rowAccumulator.slice());
-            rowAccumulator = [];
-        }
-    })
-
-    return rows;
-}
-
