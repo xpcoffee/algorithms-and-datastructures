@@ -54,7 +54,7 @@ export function rowTraversal<T>({ root, onNode, onEndRow, searchPredicate }: Row
     let nextRow: BinaryTreeNode<T>[] = []; // we're building this up; we'll traverse through it next
 
     while (currentRow.length !== 0) {
-        currentRow.forEach(node => {
+        for (const node of currentRow) {
             onNode && onNode(node.value);
 
             if (searchPredicate && searchPredicate(node.value)) {
@@ -63,7 +63,7 @@ export function rowTraversal<T>({ root, onNode, onEndRow, searchPredicate }: Row
 
             node.left && nextRow.push(node.left);
             node.right && nextRow.push(node.right);
-        });
+        };
 
         currentRow = nextRow.slice();
         nextRow = [];

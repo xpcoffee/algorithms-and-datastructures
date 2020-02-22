@@ -43,7 +43,7 @@ describe("breadthFirstTraversal", () => {
   })
 
   it("can find a node", () => {
-    const node = zigzagTraversal({ root: tree.root, searchPredicate: value => value === 4 })
+    const node = breadthFirstTraversal({ root: tree.root, searchPredicate: value => value === 4 })
     expect(node?.left?.value).toEqual(3);
     expect(node?.right?.value).toEqual(6);
   })
@@ -92,7 +92,7 @@ describe("rowTraversal", () => {
   })
 
   it("can find a node", () => {
-    const node = zigzagTraversal({ root: tree.root, searchPredicate: value => value === 4 })
+    const node = rowTraversal({ root: tree.root, searchPredicate: value => value === 4 })
     expect(node?.left?.value).toEqual(3);
     expect(node?.right?.value).toEqual(6);
   })
