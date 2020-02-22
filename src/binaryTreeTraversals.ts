@@ -1,5 +1,6 @@
 import { BinaryTreeNode } from "./binaryTree";
 import { Queue } from "./queue";
+import { Stack } from "./stack";
 
 interface TraversalArgs<T> {
     root: BinaryTreeNode<T> | undefined;
@@ -118,4 +119,35 @@ export function zigzagTraversal<T>({ root, onNode, searchPredicate }: TraversalA
     }
 
     return;
+}
+
+/* 
+ Returns a node for which the searchPredicate evalutates to true
+ Returns undefined if no node was found or if no searchPredicate was given
+*/
+export function depthFirstTraversal<T>({ root, onNode, searchPredicate }: TraversalArgs<T>): BinaryTreeNode<T> | undefined {
+    if (root === undefined) {
+        return undefined; // empty
+    }
+
+    let stack = new Stack<BinaryTreeNode<T>>();
+    stack.push(root);
+
+    let node = stack.pop();
+    while (node !== undefined) {
+        onNode && onNode(node.value);
+
+        if (searchPredicate && searchPredicate(node.value)) {
+            return node;
+        }
+
+        // quick note: if we want left-to-right depth first traversal,
+        // we need to push onto the stack from right to left to ensure
+        // that the left nodes are "above" the right nodes in the stack.
+        node.right && stack.push(node.right);
+        node.left && stack.push(node.left);
+        node = stack.pop();
+    }
+
+    return undefined; // nothing found
 }
