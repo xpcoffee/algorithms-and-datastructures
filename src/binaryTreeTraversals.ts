@@ -12,6 +12,29 @@ interface TraversalArgs<T> {
  Returns a node for which the searchPredicate evalutates to true
  Returns undefined if no node was found or if no searchPredicate was given
 */
+export function orderedTraversal<T>({ root: node, onNode, searchPredicate }: TraversalArgs<T>): BinaryTreeNode<T> | undefined {
+    if (node === undefined) {
+        return;
+    }
+
+    const leftResult = orderedTraversal({ root: node.left, onNode, searchPredicate });
+    if (leftResult !== undefined) {
+        return leftResult;
+    }
+
+    onNode && onNode(node.value);
+    if (searchPredicate && searchPredicate(node.value)) {
+        return node;
+    }
+
+    const rightResult = orderedTraversal({ root: node.right, onNode, searchPredicate });
+    return rightResult;
+}
+
+/* 
+ Returns a node for which the searchPredicate evalutates to true
+ Returns undefined if no node was found or if no searchPredicate was given
+*/
 export function breadthFirstTraversal<T>({ root, onNode, searchPredicate }: TraversalArgs<T>): BinaryTreeNode<T> | undefined {
     if (root === undefined) {
         return;

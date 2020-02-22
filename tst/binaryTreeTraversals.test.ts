@@ -1,5 +1,5 @@
 import { BinaryTree } from "../src/binaryTree";
-import { rowTraversal, breadthFirstTraversal, zigzagTraversal, depthFirstTraversal } from "../src/binaryTreeTraversals";
+import { rowTraversal, breadthFirstTraversal, zigzagTraversal, depthFirstTraversal, orderedTraversal } from "../src/binaryTreeTraversals";
 
 // tells the binary tree how to order numbers
 const compareNumbers = (a: number, b: number) => {
@@ -11,6 +11,43 @@ const compareNumbers = (a: number, b: number) => {
   }
   return "equal";
 };
+
+describe("orderedTraversal", () => {
+  /*    
+   * Input tree:
+   *        _,8._
+   *      /      \
+   *      4       12
+   *    / \      /
+   *    3   6    9
+   *  /     \     \
+   *  1       7    11
+   */
+  const tree = new BinaryTree<number>(compareNumbers);
+  tree
+    .insert(8)
+    .insert(4)
+    .insert(12)
+    .insert(3)
+    .insert(6)
+    .insert(9)
+    .insert(11)
+    .insert(1)
+    .insert(7);
+
+
+  it("should result in breadth-first traversal", () => {
+    const numbersTravered: number[] = [];
+    orderedTraversal({ root: tree.root, onNode: value => numbersTravered.push(value) })
+    expect(numbersTravered).toEqual([1, 3, 4, 6, 7, 8, 9, 11, 12]);
+  })
+
+  it("can find a node", () => {
+    const node = orderedTraversal({ root: tree.root, searchPredicate: value => value === 4 })
+    expect(node?.left?.value).toEqual(3);
+    expect(node?.right?.value).toEqual(6);
+  })
+})
 
 describe("breadthFirstTraversal", () => {
   /*    
