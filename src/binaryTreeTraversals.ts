@@ -1,7 +1,7 @@
 import { BinaryTreeNode } from "./binaryTree";
 import { Queue } from "./queue";
 
-interface BreadthFirstTraversalArgs<T> {
+interface TraversalArgs<T> {
     root: BinaryTreeNode<T> | undefined;
     onNode?: (value: T) => void,
     searchPredicate?: (value: T) => boolean;
@@ -11,7 +11,7 @@ interface BreadthFirstTraversalArgs<T> {
  Returns a node for which the searchPredicate evalutates to true
  Returns undefined if no node was found or if no searchPredicate was given
 */
-export function breadthFirstTraversal<T>({ root, onNode, searchPredicate }: BreadthFirstTraversalArgs<T>): BinaryTreeNode<T> | undefined {
+export function breadthFirstTraversal<T>({ root, onNode, searchPredicate }: TraversalArgs<T>): BinaryTreeNode<T> | undefined {
     if (root === undefined) {
         return;
     }
@@ -36,7 +36,7 @@ export function breadthFirstTraversal<T>({ root, onNode, searchPredicate }: Brea
     return;
 }
 
-interface RowTraversalArgs<T> extends BreadthFirstTraversalArgs<T> {
+interface RowTraversalArgs<T> extends TraversalArgs<T> {
     onEndRow?: () => void;
 }
 
@@ -78,7 +78,7 @@ export function rowTraversal<T>({ root, onNode, onEndRow, searchPredicate }: Row
  Returns a node for which the searchPredicate evalutates to true
  Returns undefined if no node was found or if no searchPredicate was given
 */
-export function zigzagTraversal<T>({ root, onNode, searchPredicate }: BreadthFirstTraversalArgs<T>): BinaryTreeNode<T> | undefined {
+export function zigzagTraversal<T>({ root, onNode, searchPredicate }: TraversalArgs<T>): BinaryTreeNode<T> | undefined {
     if (root === undefined) {
         return;
     }
