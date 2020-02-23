@@ -10,7 +10,7 @@ const compareNumbers = (a: number, b: number) => {
     return "equal";
 };
 
-describe("BinaryTree", () => {
+describe("BinarySearchTree", () => {
     const tree = new BinarySearchTree<number>(compareNumbers);
 
     it("should store unique elements", () => {
