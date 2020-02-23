@@ -21,12 +21,14 @@ export class CompleteBinaryTree<T> {
         }
 
         if (endNode.left === undefined) {
+            newNode.parent = endNode;
             endNode.left = newNode;
             this.size += 1;
             return this;
         }
 
         if (endNode.right === undefined) {
+            newNode.parent = endNode;
             endNode.right = newNode;
             this.size += 1;
             return this;

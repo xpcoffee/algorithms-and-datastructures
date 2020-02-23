@@ -46,6 +46,7 @@ describe("breadthFirstTraversal", () => {
         const node = breadthFirstTraversal({ root: tree.root, searchPredicate: ({ value }) => value === 4 })
         expect(node?.left?.value).toEqual(3);
         expect(node?.right?.value).toEqual(6);
+        expect(node?.parent?.value).toEqual(8);
     })
 })
 
@@ -95,6 +96,7 @@ describe("rowTraversal", () => {
         const node = rowTraversal({ root: tree.root, searchPredicate: ({ value }) => value === 4 })
         expect(node?.left?.value).toEqual(3);
         expect(node?.right?.value).toEqual(6);
+        expect(node?.parent?.value).toEqual(8);
     })
 })
 
@@ -131,6 +133,7 @@ describe("zigzagTraversal", () => {
         const node = zigzagTraversal({ root: tree.root, searchPredicate: ({ value }) => value === 4 })
         expect(node?.left?.value).toEqual(3);
         expect(node?.right?.value).toEqual(6);
+        expect(node?.parent?.value).toEqual(8);
     })
 })
 
@@ -168,5 +171,6 @@ describe("depthFirstTraversal", () => {
         const node = depthFirstTraversal({ root: tree.root, searchPredicate: ({ value }) => value === 4 })
         expect(node?.left?.value).toEqual(3);
         expect(node?.right?.value).toEqual(6);
+        expect(node?.parent?.value).toEqual(8);
     })
 })

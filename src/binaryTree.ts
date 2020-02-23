@@ -3,6 +3,7 @@ import { Stack } from "./stack";
 
 export interface BinaryTreeNode<T> {
     value: T;
+    parent?: BinaryTreeNode<T>;
     left?: BinaryTreeNode<T>;
     right?: BinaryTreeNode<T>;
 }

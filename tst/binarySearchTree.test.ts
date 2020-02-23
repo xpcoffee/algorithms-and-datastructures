@@ -70,5 +70,6 @@ describe("orderedTraversal", () => {
         const node = orderedTraversal({ root: tree.root, searchPredicate: ({ value }) => value === 4 })
         expect(node?.left?.value).toEqual(3);
         expect(node?.right?.value).toEqual(6);
+        expect(node?.parent?.value).toEqual(8);
     })
 })

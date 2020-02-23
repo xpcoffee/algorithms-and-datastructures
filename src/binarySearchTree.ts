@@ -50,7 +50,7 @@ export class BinarySearchTree<T> {
 
             case "larger":
                 if (node.right === undefined) {
-                    node.right = { value };
+                    node.right = { value, parent: node };
                     this.size += 1;
                 } else {
                     this.recursiveInsert(node.right, value);
@@ -59,7 +59,7 @@ export class BinarySearchTree<T> {
 
             case "smaller":
                 if (node.left === undefined) {
-                    node.left = { value };
+                    node.left = { value, parent: node };
                     this.size += 1;
                 } else {
                     this.recursiveInsert(node.left, value);

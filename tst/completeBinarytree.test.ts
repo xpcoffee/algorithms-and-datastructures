@@ -16,16 +16,7 @@ describe("CompleteBinaryTree", () => {
      * 1      7
      */
     const tree = new CompleteBinaryTree<number>();
-    tree
-        .insert(2)
-        .insert(12)
-        .insert(4)
-        .insert(11)
-        .insert(3)
-        .insert(6)
-        .insert(9)
-        .insert(1)
-        .insert(7);
+    [2, 12, 4, 11, 3, 6, 9, 1, 7].forEach(tree.insert)
 
     it("should insert items from left to right", () => {
         const numbersTravered: number[] = [];
