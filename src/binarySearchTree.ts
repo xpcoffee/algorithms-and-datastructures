@@ -1,4 +1,4 @@
-import { BinaryTreeNode } from "./binaryTree";
+import { BinaryTreeNode, BinaryTreeTraversalArgs } from "./binaryTree";
 
 type CompareFn<T> = (a: T, b: T) => "smaller" | "larger" | "equal";
 
@@ -67,4 +67,27 @@ export class BinarySearchTree<T> {
                 break;
         }
     }
+}
+
+/* 
+ Returns a node for which the searchPredicate evalutates to true
+ Returns undefined if no node was found or if no searchPredicate was given
+*/
+export function orderedTraversal<T>({ root: node, onNode, searchPredicate }: BinaryTreeTraversalArgs<T>): BinaryTreeNode<T> | undefined {
+    if (node === undefined) {
+        return;
+    }
+
+    const leftResult = orderedTraversal({ root: node.left, onNode, searchPredicate });
+    if (leftResult !== undefined) {
+        return leftResult;
+    }
+
+    onNode && onNode(node);
+    if (searchPredicate && searchPredicate(node)) {
+        return node;
+    }
+
+    const rightResult = orderedTraversal({ root: node.right, onNode, searchPredicate });
+    return rightResult;
 }

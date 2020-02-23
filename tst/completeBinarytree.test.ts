@@ -1,5 +1,5 @@
 import { CompleteBinaryTree } from "../src/completeBinaryTree";
-import { breadthFirstTraversal } from "../src/binaryTreeTraversals";
+import { breadthFirstTraversal } from "../src/binaryTree";
 
 describe("CompleteBinaryTree", () => {
     /*    
