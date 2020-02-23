@@ -5,12 +5,12 @@ export class CompleteBinaryTree<T> {
     root: BinaryTreeNode<T> | undefined;
     size: number = 0;
 
-    insert = (item: T): CompleteBinaryTree<T> => {
+    insert = (item: T): BinaryTreeNode<T> => {
         const newNode: BinaryTreeNode<T> = { value: item };
         if (this.root === undefined) {
             this.root = newNode;
             this.size += 1;
-            return this;
+            return newNode;
         }
 
         const hasOpenChild: (node: BinaryTreeNode<T>) => boolean = ({ left, right }) => left === undefined || right === undefined;
@@ -24,14 +24,14 @@ export class CompleteBinaryTree<T> {
             newNode.parent = endNode;
             endNode.left = newNode;
             this.size += 1;
-            return this;
+            return newNode;
         }
 
         if (endNode.right === undefined) {
             newNode.parent = endNode;
             endNode.right = newNode;
             this.size += 1;
-            return this;
+            return newNode;
         }
 
         throw `[ERROR] Unexpected condition. Found an 'end node' with no space for child nodes: ${JSON.stringify(endNode)}`
