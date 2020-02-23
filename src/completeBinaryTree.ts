@@ -1,5 +1,5 @@
-import { BinaryTreeNode } from "./binaryTree";
 import { breadthFirstTraversal } from "./binaryTreeTraversals";
+import { BinaryTreeNode } from "./binaryTree";
 
 
 export class CompleteBinaryTree<T> {

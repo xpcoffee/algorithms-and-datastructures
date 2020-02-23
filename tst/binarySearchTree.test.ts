@@ -1,4 +1,4 @@
-import { BinaryTree } from "../src/binaryTree";
+import { BinarySearchTree } from "../src/binarySearchTree";
 
 const compareNumbers = (a: number, b: number) => {
     if (a > b) {
@@ -11,7 +11,7 @@ const compareNumbers = (a: number, b: number) => {
 };
 
 describe("BinaryTree", () => {
-    const tree = new BinaryTree<number>(compareNumbers);
+    const tree = new BinarySearchTree<number>(compareNumbers);
 
     it("should store unique elements", () => {
         tree

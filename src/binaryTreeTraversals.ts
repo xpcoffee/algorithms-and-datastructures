@@ -1,6 +1,6 @@
-import { BinaryTreeNode } from "./binaryTree";
 import { Queue } from "./queue";
 import { Stack } from "./stack";
+import { BinaryTreeNode } from "./binaryTree";
 
 interface TraversalArgs<T> {
     root: BinaryTreeNode<T> | undefined;

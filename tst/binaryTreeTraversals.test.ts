@@ -1,4 +1,4 @@
-import { BinaryTree } from "../src/binaryTree";
+import { BinarySearchTree } from "../src/binarySearchTree";
 import { rowTraversal, breadthFirstTraversal, zigzagTraversal, depthFirstTraversal, orderedTraversal } from "../src/binaryTreeTraversals";
 
 // tells the binary tree how to order numbers
@@ -23,7 +23,7 @@ describe("orderedTraversal", () => {
    *  /     \     \
    *  1       7    11
    */
-  const tree = new BinaryTree<number>(compareNumbers);
+  const tree = new BinarySearchTree<number>(compareNumbers);
   tree
     .insert(8)
     .insert(4)
@@ -60,7 +60,7 @@ describe("breadthFirstTraversal", () => {
    *  /     \     \
    *  1       7    11
    */
-  const tree = new BinaryTree<number>(compareNumbers);
+  const tree = new BinarySearchTree<number>(compareNumbers);
   tree
     .insert(8)
     .insert(4)
@@ -97,7 +97,7 @@ describe("rowTraversal", () => {
    *  /     \     \
    *  1       7    11
    */
-  const tree = new BinaryTree<number>(compareNumbers);
+  const tree = new BinarySearchTree<number>(compareNumbers);
   tree
     .insert(8)
     .insert(4)
@@ -146,7 +146,7 @@ describe("zigzagTraversal", () => {
    *  /     \     \
    *  1       7    11
    */
-  const tree = new BinaryTree<number>(compareNumbers);
+  const tree = new BinarySearchTree<number>(compareNumbers);
   tree
     .insert(8)
     .insert(4)
@@ -182,7 +182,7 @@ describe("depthFirstTraversal", () => {
    *  /     \     \
    *  1       7    11
    */
-  const tree = new BinaryTree<number>(compareNumbers);
+  const tree = new BinarySearchTree<number>(compareNumbers);
   tree
     .insert(8)
     .insert(4)
