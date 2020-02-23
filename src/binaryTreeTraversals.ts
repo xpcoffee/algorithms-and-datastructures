@@ -4,8 +4,8 @@ import { Stack } from "./stack";
 
 interface TraversalArgs<T> {
     root: BinaryTreeNode<T> | undefined;
-    onNode?: (value: T) => void,
-    searchPredicate?: (value: T) => boolean;
+    onNode?: (node: BinaryTreeNode<T>) => void,
+    searchPredicate?: (node: BinaryTreeNode<T>) => boolean;
 }
 
 /* 
@@ -22,8 +22,8 @@ export function orderedTraversal<T>({ root: node, onNode, searchPredicate }: Tra
         return leftResult;
     }
 
-    onNode && onNode(node.value);
-    if (searchPredicate && searchPredicate(node.value)) {
+    onNode && onNode(node);
+    if (searchPredicate && searchPredicate(node)) {
         return node;
     }
 
@@ -46,9 +46,9 @@ export function breadthFirstTraversal<T>({ root, onNode, searchPredicate }: Trav
 
     let node = queue.dequeue();
     while (node !== undefined) {
-        onNode && onNode(node.value);
+        onNode && onNode(node);
 
-        if (searchPredicate && searchPredicate(node.value)) {
+        if (searchPredicate && searchPredicate(node)) {
             return node;
         }
 
@@ -79,9 +79,9 @@ export function rowTraversal<T>({ root, onNode, onEndRow, searchPredicate }: Row
 
     while (currentRow.length !== 0) {
         for (const node of currentRow) {
-            onNode && onNode(node.value);
+            onNode && onNode(node);
 
-            if (searchPredicate && searchPredicate(node.value)) {
+            if (searchPredicate && searchPredicate(node)) {
                 return node;
             }
 
@@ -121,9 +121,9 @@ export function zigzagTraversal<T>({ root, onNode, searchPredicate }: TraversalA
          */
         for (let i = currentRow.length - 1; i >= 0; i--) {
             const node = currentRow[i];
-            onNode && onNode(node.value);
+            onNode && onNode(node);
 
-            if (searchPredicate && searchPredicate(node.value)) {
+            if (searchPredicate && searchPredicate(node)) {
                 return node;
             }
 
@@ -158,9 +158,9 @@ export function depthFirstTraversal<T>({ root, onNode, searchPredicate }: Traver
 
     let node = stack.pop();
     while (node !== undefined) {
-        onNode && onNode(node.value);
+        onNode && onNode(node);
 
-        if (searchPredicate && searchPredicate(node.value)) {
+        if (searchPredicate && searchPredicate(node)) {
             return node;
         }
 

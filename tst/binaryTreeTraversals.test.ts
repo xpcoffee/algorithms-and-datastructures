@@ -38,12 +38,12 @@ describe("orderedTraversal", () => {
 
   it("should result in breadth-first traversal", () => {
     const numbersTravered: number[] = [];
-    orderedTraversal({ root: tree.root, onNode: value => numbersTravered.push(value) })
+    orderedTraversal({ root: tree.root, onNode: ({ value }) => numbersTravered.push(value) })
     expect(numbersTravered).toEqual([1, 3, 4, 6, 7, 8, 9, 11, 12]);
   })
 
   it("can find a node", () => {
-    const node = orderedTraversal({ root: tree.root, searchPredicate: value => value === 4 })
+    const node = orderedTraversal({ root: tree.root, searchPredicate: ({ value }) => value === 4 })
     expect(node?.left?.value).toEqual(3);
     expect(node?.right?.value).toEqual(6);
   })
@@ -75,12 +75,12 @@ describe("breadthFirstTraversal", () => {
 
   it("should result in breadth-first traversal", () => {
     const numbersTravered: number[] = [];
-    breadthFirstTraversal({ root: tree.root, onNode: value => numbersTravered.push(value) })
+    breadthFirstTraversal({ root: tree.root, onNode: ({ value }) => numbersTravered.push(value) })
     expect(numbersTravered).toEqual([8, 4, 12, 3, 6, 9, 1, 7, 11]);
   })
 
   it("can find a node", () => {
-    const node = breadthFirstTraversal({ root: tree.root, searchPredicate: value => value === 4 })
+    const node = breadthFirstTraversal({ root: tree.root, searchPredicate: ({ value }) => value === 4 })
     expect(node?.left?.value).toEqual(3);
     expect(node?.right?.value).toEqual(6);
   })
@@ -111,7 +111,7 @@ describe("rowTraversal", () => {
 
   it("should result in breadth-first traversal", () => {
     const numbersTravered: number[] = [];
-    rowTraversal({ root: tree.root, onNode: value => numbersTravered.push(value) })
+    rowTraversal({ root: tree.root, onNode: ({ value }) => numbersTravered.push(value) })
     expect(numbersTravered).toEqual([8, 4, 12, 3, 6, 9, 1, 7, 11]);
   })
 
@@ -121,7 +121,7 @@ describe("rowTraversal", () => {
 
     rowTraversal({
       root: tree.root,
-      onNode: value => lastNumber = value,
+      onNode: ({ value }) => lastNumber = value,
       onEndRow: () => lastNumber !== undefined && lastNumbersInRow.push(lastNumber)
     })
 
@@ -129,7 +129,7 @@ describe("rowTraversal", () => {
   })
 
   it("can find a node", () => {
-    const node = rowTraversal({ root: tree.root, searchPredicate: value => value === 4 })
+    const node = rowTraversal({ root: tree.root, searchPredicate: ({ value }) => value === 4 })
     expect(node?.left?.value).toEqual(3);
     expect(node?.right?.value).toEqual(6);
   })
@@ -160,12 +160,12 @@ describe("zigzagTraversal", () => {
 
   it("should zig-zag", () => {
     const numbersTravered: number[] = [];
-    zigzagTraversal({ root: tree.root, onNode: value => numbersTravered.push(value) })
+    zigzagTraversal({ root: tree.root, onNode: ({ value }) => numbersTravered.push(value) })
     expect(numbersTravered).toEqual([8, 12, 4, 3, 6, 9, 11, 7, 1]);
   })
 
   it("can find a node", () => {
-    const node = zigzagTraversal({ root: tree.root, searchPredicate: value => value === 4 })
+    const node = zigzagTraversal({ root: tree.root, searchPredicate: ({ value }) => value === 4 })
     expect(node?.left?.value).toEqual(3);
     expect(node?.right?.value).toEqual(6);
   })
@@ -197,12 +197,12 @@ describe("depthFirstTraversal", () => {
 
   it("should result in depth-first traversal", () => {
     const numbersTravered: number[] = [];
-    depthFirstTraversal({ root: tree.root, onNode: value => numbersTravered.push(value) })
+    depthFirstTraversal({ root: tree.root, onNode: ({ value }) => numbersTravered.push(value) })
     expect(numbersTravered).toEqual([8, 4, 3, 1, 6, 7, 12, 9, 11]);
   })
 
   it("can find a node", () => {
-    const node = depthFirstTraversal({ root: tree.root, searchPredicate: value => value === 4 })
+    const node = depthFirstTraversal({ root: tree.root, searchPredicate: ({ value }) => value === 4 })
     expect(node?.left?.value).toEqual(3);
     expect(node?.right?.value).toEqual(6);
   })
