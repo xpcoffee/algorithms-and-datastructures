@@ -8,8 +8,14 @@ import { BinaryTreeNode } from "./binaryTree";
 type HeapPredicate<T> = (item: T, otherItem: T) => boolean;
 
 export class Heap<T>  {
-    shouldMoveTowardsRoot: HeapPredicate<T>;
+    /*
+     * We compose the heap using a complete binary tree. I would prefer this to be inheritance,
+     * as, in this case, a heap is defined as being a complete binary tree. However, I found it
+     * tricky to use inheritance in practice due to edgecases around prototype-based inheritance.
+     * Specifically: I kept running into issues when using arrow/bound functions.
+     */
     completeBinaryTree: CompleteBinaryTree<T> = new CompleteBinaryTree();
+    shouldMoveTowardsRoot: HeapPredicate<T>;
     size: number = 0;
     root: BinaryTreeNode<T> | undefined;
 
@@ -22,6 +28,18 @@ export class Heap<T>  {
     }
 
     push(item: T): BinaryTreeNode<T> {
+        /*
+         * Visual representation of names given to nodes in this algorithm:
+         *
+         *                               {top}
+         *                               /
+         *                             {parent}
+         * This is the                 /     \
+         * node being inserted----->{node}  {otherChild}
+         *                          /    \
+         *               {bottomLeft}    {bottomRight}
+         */
+
         const node = this.completeBinaryTree.insert(item);
         let parent = node.parent;
 
