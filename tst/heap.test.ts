@@ -20,7 +20,6 @@ describe("MinHeap", () => {
         expect(heap.peek()).toEqual(10);
 
         heap.push(7);
-        // breadthFirstTraversal({ root: heap.root, onNode: console.log })
         expect(heap.peek()).toEqual(7);
 
         heap.push(5);
