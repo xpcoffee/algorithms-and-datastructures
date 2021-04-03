@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "[git pre-commit] Running tests"
+npm test
+test_result=$?
+echo "result $test_result"
+if [ "$test_result" -ne 0 ]
+then
+    echo >&2 "[git pre-commit] NOT committing: Tests failed"
+    exit 1
+fi

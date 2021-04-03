@@ -1,20 +1,22 @@
 {
-  "name": "algorithms-and-datastructures",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest",
-    "testWatch": "jest --watch"
-  },
-  "author": "Emerick Bosch",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/jest": "^25.2.3",
-    "@types/node": "^13.13.48",
-    "jest": "^25.5.4",
-    "prettier": "^1.19.1",
-    "ts-jest": "^25.5.1",
-    "typescript": "^3.9.9"
-  }
+    "name": "algorithms-and-datastructures",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest",
+        "testWatch": "jest --watch",
+        "preinstall": "husky install"
+    },
+    "author": "Emerick Bosch",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/jest": "^25.2.3",
+        "@types/node": "^13.13.48",
+        "husky": "^6.0.0",
+        "jest": "^25.5.4",
+        "prettier": "^1.19.1",
+        "ts-jest": "^25.5.1",
+        "typescript": "^3.9.9"
+    }
 }
