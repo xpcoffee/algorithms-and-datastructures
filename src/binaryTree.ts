@@ -1,6 +1,13 @@
 import { Queue } from "./queue";
 import { Stack } from "./stack";
 
+// This file should only contain structures and algorithms that are generic to *all* binary trees
+
+/**
+ * A binary tree node.
+ *
+ * This is technically the only thing that defines a binary tree.
+ */
 export interface BinaryTreeNode<T> {
     value: T;
     parent?: BinaryTreeNode<T>;
@@ -10,22 +17,25 @@ export interface BinaryTreeNode<T> {
 
 export interface BinaryTreeTraversalArgs<T> {
     root: BinaryTreeNode<T> | undefined;
-    onNode?: (node: BinaryTreeNode<T>) => void,
+    onNode?: (node: BinaryTreeNode<T>) => void;
     searchPredicate?: (node: BinaryTreeNode<T>) => boolean;
 }
 
-/* 
- Returns a node for which the searchPredicate evalutates to true
- Returns undefined if no node was found or if no searchPredicate was given
-*/
-export function breadthFirstTraversal<T>({ root, onNode, searchPredicate }: BinaryTreeTraversalArgs<T>): BinaryTreeNode<T> | undefined {
+/**
+ * Returns a node for which the searchPredicate evalutates to true
+ * Returns undefined if no node was found or if no searchPredicate was given
+ */
+export function breadthFirstTraversal<T>({
+    root,
+    onNode,
+    searchPredicate,
+}: BinaryTreeTraversalArgs<T>): BinaryTreeNode<T> | undefined {
     if (root === undefined) {
         return;
     }
 
     let queue = new Queue<BinaryTreeNode<T>>();
     queue.enqueue(root);
-
 
     let node = queue.dequeue();
     while (node !== undefined) {
@@ -52,7 +62,12 @@ interface RowTraversalArgs<T> extends BinaryTreeTraversalArgs<T> {
  Returns a node for which the searchPredicate evalutates to true
  Returns undefined if no node was found or if no searchPredicate was given
 */
-export function rowTraversal<T>({ root, onNode, onEndRow, searchPredicate }: RowTraversalArgs<T>): BinaryTreeNode<T> | undefined {
+export function rowTraversal<T>({
+    root,
+    onNode,
+    onEndRow,
+    searchPredicate,
+}: RowTraversalArgs<T>): BinaryTreeNode<T> | undefined {
     if (root === undefined) {
         return;
     }
@@ -70,7 +85,7 @@ export function rowTraversal<T>({ root, onNode, onEndRow, searchPredicate }: Row
 
             node.left && nextRow.push(node.left);
             node.right && nextRow.push(node.right);
-        };
+        }
 
         currentRow = nextRow.slice();
         nextRow = [];
@@ -85,7 +100,11 @@ export function rowTraversal<T>({ root, onNode, onEndRow, searchPredicate }: Row
  Returns a node for which the searchPredicate evalutates to true
  Returns undefined if no node was found or if no searchPredicate was given
 */
-export function zigzagTraversal<T>({ root, onNode, searchPredicate }: BinaryTreeTraversalArgs<T>): BinaryTreeNode<T> | undefined {
+export function zigzagTraversal<T>({
+    root,
+    onNode,
+    searchPredicate,
+}: BinaryTreeTraversalArgs<T>): BinaryTreeNode<T> | undefined {
     if (root === undefined) {
         return;
     }
@@ -96,11 +115,30 @@ export function zigzagTraversal<T>({ root, onNode, searchPredicate }: BinaryTree
 
     while (currentRow.length !== 0) {
         /*
-         There's a central thought here: 
-         nodes added to nextRow are always added in the direction that currentRow is being traversed
-         i.e. if we're traversing left to right, items are being added to the nextRow left to right; 
-         if we're traversing right to left, items are being added to the nextRow right to left.
-         To zigzag, we need to take the nextRow and iterate through it in reverse.
+         The core idea that gives us zig-zag motion is that we're iterating backwards from the **end** 
+         of the currentRow and pushing their children to the **beginning** of the nextRow.
+         nextRow.
+
+              1
+            /   \
+           2     3
+          / \   / \
+         4   5 6   7
+
+         currentRow = [2,3]
+         iterating backwards gives us the "zig" and we push the children to the front of next row
+         nextRow = [7,6,5,4]
+         iterating backwards from this now gives us the "zag"
+              1
+            /   \
+           2     3
+         <---zig----
+          / \   / \
+         4   5 6   7
+         ----zag---->
+
+         It's also important to know which direction we're iterating on so that you push the children into
+         the nextRow in the correct order.
          */
         for (let i = currentRow.length - 1; i >= 0; i--) {
             const node = currentRow[i];
@@ -131,7 +169,11 @@ export function zigzagTraversal<T>({ root, onNode, searchPredicate }: BinaryTree
  Returns a node for which the searchPredicate evalutates to true
  Returns undefined if no node was found or if no searchPredicate was given
 */
-export function depthFirstTraversal<T>({ root, onNode, searchPredicate }: BinaryTreeTraversalArgs<T>): BinaryTreeNode<T> | undefined {
+export function depthFirstTraversal<T>({
+    root,
+    onNode,
+    searchPredicate,
+}: BinaryTreeTraversalArgs<T>): BinaryTreeNode<T> | undefined {
     if (root === undefined) {
         return undefined; // empty
     }
