@@ -20,9 +20,11 @@ This holds my own exercises on algorithms and datastructures. The intent is to u
 
 Hooks are configured and run using [husky](https://github.com/typicode/husky) (which was recommended for windows support over [git-hooks](https://github.com/tarmolov/git-hooks-js/issues/36)).
 
-Find the hooks in the [.husky/] directory.
+Find the hooks in the `.husky` directory.
 
-To commit without hooks run:
+**[Pre-commit](.husky/pre-commit)**
+
+Runs tests automatically before committing. If you run into the **_very rare_** situation where you **_need_** to commit without running tests, use the following:
 
 ```
 git commit --no-verify
