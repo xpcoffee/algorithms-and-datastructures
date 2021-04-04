@@ -40,11 +40,7 @@ function quicksortCore<T>(array: T[], compare: CompareFn<T>, lowIndex: number, h
         array[indexB] = temp;
     }
 
-    function endCondition() {
-        return pointerFindLarger >= pointerFindSmallerOrEqual;
-    }
-
-    while (!endCondition()) {
+    while (pointerFindLarger < pointerFindSmallerOrEqual) {
         while (compare(array[pointerFindLarger], pivot) !== "larger" && pointerFindLarger < highIndex) {
             pointerFindLarger++;
         }
