@@ -1,4 +1,5 @@
 import { BinaryTreeNode, BinaryTreeTraversalArgs } from "./binaryTree";
+import { CompareFn } from "./compare";
 
 /**
  * A Binary Search Tree is a binary tree in which nodes are positioned according to a heirarchy.
@@ -84,11 +85,6 @@ export class BinarySearchTree<T> {
         }
     };
 }
-
-/**
- * The compare function to use when comparing elements of a binary search tree.
- */
-type CompareFn<T> = (a: T, b: T) => "smaller" | "larger" | "equal";
 
 /**
  * Performs an in-order traversal of a binary search tree, given its root.

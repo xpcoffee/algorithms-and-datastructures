@@ -1,14 +1,5 @@
 import { BinarySearchTree, inOrderTraversal, postOrderTraversal, preOrderTraversal } from "../src/binarySearchTree";
-
-const compareNumbers = (a: number, b: number) => {
-    if (a > b) {
-        return "smaller";
-    }
-    if (a < b) {
-        return "larger";
-    }
-    return "equal";
-};
+import { compareNumbers } from "../src/compare";
 
 describe("BinarySearchTree", () => {
     const tree = new BinarySearchTree<number>(compareNumbers);

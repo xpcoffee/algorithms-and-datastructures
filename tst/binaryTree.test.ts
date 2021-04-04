@@ -1,22 +1,12 @@
 import { BinarySearchTree } from "../src/binarySearchTree";
 import { breadthFirstTraversal, rowTraversal, zigzagTraversal, depthFirstTraversal } from "../src/binaryTree";
+import { compareNumbers } from "../src/compare";
 
 /**
  * Notes on these tests:
  *
  *  - we use a binary search tree here for simplicity of setting up a tree against which to test
  */
-
-// tells the binary tree how to order numbers
-const compareNumbers = (a: number, b: number) => {
-    if (a > b) {
-        return "smaller";
-    }
-    if (a < b) {
-        return "larger";
-    }
-    return "equal";
-};
 
 describe("breadthFirstTraversal", () => {
     /*
