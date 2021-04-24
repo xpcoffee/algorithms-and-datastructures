@@ -1,4 +1,4 @@
-import { LinkedList } from "../src/linkedList";
+import { LinkedList, toIterator, toReverseIterator } from "../src/linkedList";
 
 describe("LinkedList", () => {
     describe("values", () => {
@@ -12,7 +12,7 @@ describe("LinkedList", () => {
         it("returns a node iterator", () => {
             const expectedValues = ["A", "B", "C", "D"];
             const list = new LinkedList<string>(expectedValues);
-            const nodes = [...list.head!.toIterator()];
+            const nodes = [...toIterator(list.head)];
             const actualValues = nodes.map((node) => node.value);
             expect(actualValues).toEqual(expectedValues);
         });
@@ -21,7 +21,7 @@ describe("LinkedList", () => {
     describe("toReverseIterator", () => {
         it("returns an iterator that steps through nodes in reverse order", () => {
             const list = new LinkedList<string>(["A", "B", "C", "D"]);
-            const nodes = [...list.tail!.toReverseIterator()];
+            const nodes = [...toReverseIterator(list.tail)];
             const actualValues = nodes.map((node) => node.value);
             expect(actualValues).toEqual(["D", "C", "B", "A"]);
         });

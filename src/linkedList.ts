@@ -27,6 +27,9 @@ export class LinkedList<T> {
         this.tail = node;
     }
 
+    /**
+     * Reverse the order of nodes in the linked list. This mutates the linked list in place.
+     */
     reverse() {
         if (this.head === undefined) {
             return;
@@ -57,12 +60,8 @@ export class LinkedList<T> {
     }
 
     values(): T[] {
-        if (this.head === undefined) {
-            return [];
-        }
-
         const values = [];
-        for (let node of this.head.toIterator()) {
+        for (let node of toIterator(this.head)) {
             values.push(node.value);
         }
         return values;
@@ -82,33 +81,43 @@ export class Node<T> {
         this.value = value;
     }
 
-    toIterator() {
-        const startingNode = this;
-        return {
-            [Symbol.iterator]: function*() {
-                let iterator: Node<T> | undefined = startingNode;
-                while (iterator !== undefined) {
-                    yield iterator;
-                    iterator = iterator.next;
-                }
-            },
-        };
-    }
-
-    toReverseIterator() {
-        const startingNode = this;
-        return {
-            [Symbol.iterator]: function*() {
-                let iterator: Node<T> | undefined = startingNode;
-                while (iterator !== undefined) {
-                    yield iterator;
-                    iterator = iterator.prev;
-                }
-            },
-        };
-    }
-
     toString() {
         return JSON.stringify({ value: this.value, next: this.next?.value, prev: this.prev?.value });
     }
+}
+
+/**
+ * Convenience function that creates an iterator from a node.
+ *
+ * @param startingNode the node to start from
+ * @returns the iterator
+ */
+export function toIterator<T>(startingNode: Node<T> | undefined) {
+    return {
+        [Symbol.iterator]: function*() {
+            let iterator: Node<T> | undefined = startingNode;
+            while (iterator !== undefined) {
+                yield iterator;
+                iterator = iterator.next;
+            }
+        },
+    };
+}
+
+/**
+ * Convenience function that creates an reverse iterator from a node.
+ *
+ * @param startingNode the node to start from
+ * @returns the iterator
+ */
+export function toReverseIterator<T>(startingNode: Node<T> | undefined) {
+    return {
+        [Symbol.iterator]: function*() {
+            let iterator: Node<T> | undefined = startingNode;
+            while (iterator !== undefined) {
+                yield iterator;
+                iterator = iterator.prev;
+            }
+        },
+    };
 }
